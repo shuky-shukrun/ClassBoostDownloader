@@ -15,8 +15,13 @@ namespace ClassBoostDownloader
         public webRequest()
         {
             cookiesContainer = new CookieContainer();
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072 | SecurityProtocolType.Tls;
         }
 
+        public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
         public string getRequest(string url, string parms)
         {
             try

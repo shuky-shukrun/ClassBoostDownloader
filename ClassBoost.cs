@@ -123,7 +123,9 @@ Meeting name: ");
                     {
                         using (var client = new WebClient())
                         {
-                            string chunkFile = Path.GetFileName(vc.file.AbsoluteUri).Replace(vc.file.Query, String.Empty);
+                            string chunkFile = Path.GetFileName(vc.file.AbsoluteUri);
+                            if (vc.file.Query.Length > 0)
+                                chunkFile = chunkFile.Replace(vc.file.Query, String.Empty);
                             rl.WriteRefreshLine(string.Format("Download chunk {0} / {1} / {2:0.00}%", i, chunkFile, ((i++ + 1) / (float)lvc.Count) * 100));
                             chunkFile = dirName + "\\" + chunkFile;
                             client.DownloadFile(vc.file, chunkFile);
